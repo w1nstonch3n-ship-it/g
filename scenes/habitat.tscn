@@ -1,0 +1,128 @@
+[gd_scene load_steps=14 format=3]
+
+[ext_resource type="Script" path="res://scripts/habitat.gd" id="script"]
+[ext_resource type="Texture2D" path="res://assets/world/forest_panorama.png" id="bg"]
+[ext_resource type="Texture2D" path="res://assets/habitat/oak_tree.png" id="oak"]
+[ext_resource type="Texture2D" path="res://assets/habitat/pine_tree.png" id="pine"]
+[ext_resource type="Texture2D" path="res://assets/habitat/bear_den.png" id="den"]
+[ext_resource type="Texture2D" path="res://assets/habitat/sleep_mat.png" id="mat"]
+[ext_resource type="Texture2D" path="res://assets/habitat/bed.png" id="bed"]
+[ext_resource type="Texture2D" path="res://assets/habitat/flowers.png" id="flowers"]
+[ext_resource type="Texture2D" path="res://assets/habitat/pond.png" id="pond"]
+[ext_resource type="Texture2D" path="res://assets/habitat/gate.png" id="gate"]
+[ext_resource type="Texture2D" path="res://assets/habitat/lantern.png" id="lantern"]
+[ext_resource type="Texture2D" path="res://assets/habitat/mushroom.png" id="mushroom"]
+[ext_resource type="PackedScene" path="res://scenes/pet.tscn" id="pet"]
+
+[node name="Habitat" type="Node2D"]
+script = ExtResource("script")
+
+[node name="Panorama" type="Sprite2D" parent="."]
+position = Vector2(800, 280)
+z_index = -50
+texture_filter = 1
+texture = ExtResource("bg")
+
+[node name="PineLeft" type="Sprite2D" parent="."]
+position = Vector2(110, 371)
+scale = Vector2(1.7, 1.7)
+texture_filter = 1
+texture = ExtResource("pine")
+
+[node name="OakLeft" type="Sprite2D" parent="."]
+position = Vector2(95, 367)
+scale = Vector2(1.6, 1.6)
+texture_filter = 1
+texture = ExtResource("oak")
+
+[node name="OakMiddle" type="Sprite2D" parent="."]
+position = Vector2(688, 370)
+scale = Vector2(1.6, 1.6)
+texture_filter = 1
+texture = ExtResource("oak")
+
+[node name="Den" type="Sprite2D" parent="."]
+position = Vector2(278, 394)
+scale = Vector2(1.55, 1.55)
+texture_filter = 1
+texture = ExtResource("den")
+
+[node name="StarterMat" type="Sprite2D" parent="."]
+position = Vector2(490, 476)
+scale = Vector2(1.5, 1.5)
+texture_filter = 1
+texture = ExtResource("mat")
+
+[node name="CozyBed" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(490, 476)
+scale = Vector2(1.7, 1.7)
+texture_filter = 1
+texture = ExtResource("bed")
+
+[node name="FlowerPatch" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(625, 474)
+scale = Vector2(1.65, 1.65)
+texture_filter = 1
+texture = ExtResource("flowers")
+
+[node name="FlowerPatchExtra" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(157, 477)
+scale = Vector2(1.3, 1.3)
+texture_filter = 1
+texture = ExtResource("flowers")
+
+[node name="Pond" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(788, 467)
+scale = Vector2(1.35, 1.35)
+texture_filter = 1
+texture = ExtResource("pond")
+
+[node name="TrailGate" type="Sprite2D" parent="."]
+position = Vector2(906, 426)
+scale = Vector2(1.25, 1.25)
+texture_filter = 1
+texture = ExtResource("gate")
+
+[node name="NewGroveOak" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(1110, 358)
+scale = Vector2(1.85, 1.85)
+texture_filter = 1
+texture = ExtResource("oak")
+
+[node name="NewGrovePine" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(1414, 386)
+scale = Vector2(1.75, 1.75)
+texture_filter = 1
+texture = ExtResource("pine")
+
+[node name="NewGroveLantern" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(1275, 450)
+scale = Vector2(1.65, 1.65)
+texture_filter = 1
+texture = ExtResource("lantern")
+
+[node name="NewGroveMushrooms" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(1350, 475)
+scale = Vector2(1.6, 1.6)
+texture_filter = 1
+texture = ExtResource("mushroom")
+
+[node name="NewGroveFlowers" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(1206, 477)
+scale = Vector2(1.5, 1.5)
+texture_filter = 1
+texture = ExtResource("flowers")
+
+[node name="GeneratedForest" type="Node2D" parent="."]
+
+[node name="Pet" parent="." instance=ExtResource("pet")]
+position = Vector2(415, 486)

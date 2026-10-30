@@ -1,0 +1,177 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/focus_panel.gd" id="1_script"]
+
+[ext_resource type="Texture2D" path="res://assets/ui/wood_green.png" id="v8_wood_green"]
+
+[sub_resource type="StyleBoxTexture" id="TimerStyle"]
+texture = ExtResource("v8_wood_green")
+texture_margin_left = 6.0
+texture_margin_top = 6.0
+texture_margin_right = 6.0
+texture_margin_bottom = 6.0
+content_margin_left = 9.0
+content_margin_top = 8.0
+content_margin_right = 9.0
+content_margin_bottom = 8.0
+
+[node name="FocusPanel" type="ScrollContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+clip_contents = true
+script = ExtResource("1_script")
+
+[node name="Content" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 6
+
+[node name="HeaderRow" type="HBoxContainer" parent="Content"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="SectionTitle" type="Label" parent="Content/HeaderRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 19
+text = "FOCUS"
+
+[node name="ModeSelect" type="OptionButton" parent="Content/HeaderRow"]
+custom_minimum_size = Vector2(126, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+
+[node name="SectionHint" type="Label" parent="Content"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 11
+text = "Study with Mochi and earn rewards."
+
+[node name="TimerCard" type="PanelContainer" parent="Content"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("TimerStyle")
+
+[node name="TimerMargin" type="MarginContainer" parent="Content/TimerCard"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="TimerStack" type="VBoxContainer" parent="Content/TimerCard/TimerMargin"]
+layout_mode = 2
+theme_override_constants/separation = 3
+
+[node name="TimerLabel" type="Label" parent="Content/TimerCard/TimerMargin/TimerStack"]
+custom_minimum_size = Vector2(0, 53)
+layout_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+theme_override_font_sizes/font_size = 42
+text = "25:00"
+
+[node name="ProgressBar" type="ProgressBar" parent="Content/TimerCard/TimerMargin/TimerStack"]
+custom_minimum_size = Vector2(0, 11)
+layout_mode = 2
+show_percentage = false
+
+[node name="TimeLabel" type="Label" parent="Content/TimerCard/TimerMargin/TimerStack"]
+layout_mode = 2
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 12
+text = "25 min study | +50 coins"
+
+[node name="DurationLabel" type="Label" parent="Content"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 11
+text = "CHOOSE A SESSION"
+
+[node name="DurationButtons" type="HBoxContainer" parent="Content"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="TestButton" type="Button" parent="Content/DurationButtons"]
+custom_minimum_size = Vector2(0, 31)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+text = "1m"
+
+[node name="ShortButton" type="Button" parent="Content/DurationButtons"]
+custom_minimum_size = Vector2(0, 31)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+text = "5m"
+
+[node name="ClassicButton" type="Button" parent="Content/DurationButtons"]
+custom_minimum_size = Vector2(0, 31)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+text = "25m"
+
+[node name="LongButton" type="Button" parent="Content/DurationButtons"]
+custom_minimum_size = Vector2(0, 31)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+text = "45m"
+
+[node name="CustomRow" type="HBoxContainer" parent="Content"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="CustomLabel" type="Label" parent="Content/CustomRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+text = "CUSTOM (min)"
+
+[node name="CustomMinutes" type="SpinBox" parent="Content/CustomRow"]
+custom_minimum_size = Vector2(78, 0)
+layout_mode = 2
+min_value = 1.0
+max_value = 120.0
+value = 30.0
+rounded = true
+
+[node name="ApplyCustom" type="Button" parent="Content/CustomRow"]
+custom_minimum_size = Vector2(56, 32)
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "SET"
+
+[node name="ActionButtons" type="HBoxContainer" parent="Content"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="StartPauseButton" type="Button" parent="Content/ActionButtons"]
+custom_minimum_size = Vector2(0, 42)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 14
+text = "START"
+
+[node name="ResetButton" type="Button" parent="Content/ActionButtons"]
+custom_minimum_size = Vector2(76, 42)
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "RESET"
+
+[node name="MessageLabel" type="Label" parent="Content"]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+autowrap_mode = 3
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 11
+text = "Finish a session to earn coins."
+
+[node name="StatsLabel" type="Label" parent="Content"]
+layout_mode = 2
+horizontal_alignment = 1
+autowrap_mode = 3
+theme_override_font_sizes/font_size = 11
+text = "0 sessions | 0 min total | 0 today"

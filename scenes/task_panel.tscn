@@ -1,0 +1,152 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/task_panel.gd" id="1_script"]
+
+[node name="TaskPanel" type="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 8
+script = ExtResource("1_script")
+
+[node name="SectionTitle" type="Label" parent="."]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "MOCHI'S PLANNER"
+
+[node name="SectionHint" type="Label" parent="."]
+layout_mode = 2
+autowrap_mode = 3
+theme_override_font_sizes/font_size = 13
+text = "Make a plan. Earn coins. Help Mochi grow."
+
+[node name="NewTaskButton" type="Button" parent="."]
+custom_minimum_size = Vector2(0, 39)
+layout_mode = 2
+text = "+ NEW TASK"
+
+[node name="FormPanel" type="PanelContainer" parent="."]
+visible = false
+layout_mode = 2
+
+[node name="FormScroll" type="ScrollContainer" parent="FormPanel"]
+custom_minimum_size = Vector2(0, 230)
+layout_mode = 2
+horizontal_scroll_mode = 0
+follow_focus = true
+
+[node name="FormPadding" type="MarginContainer" parent="FormPanel/FormScroll"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="FormStack" type="VBoxContainer" parent="FormPanel/FormScroll/FormPadding"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="TitleInput" type="LineEdit" parent="FormPanel/FormScroll/FormPadding/FormStack"]
+layout_mode = 2
+max_length = 80
+placeholder_text = "What will you work on?"
+
+[node name="KindSelect" type="OptionButton" parent="FormPanel/FormScroll/FormPadding/FormStack"]
+layout_mode = 2
+
+[node name="SizeSelect" type="OptionButton" parent="FormPanel/FormScroll/FormPadding/FormStack"]
+layout_mode = 2
+
+[node name="BoardLabel" type="Label" parent="FormPanel/FormScroll/FormPadding/FormStack"]
+layout_mode = 2
+text = "BOARD"
+theme_override_font_sizes/font_size = 12
+
+[node name="BoardSelect" type="OptionButton" parent="FormPanel/FormScroll/FormPadding/FormStack"]
+layout_mode = 2
+
+[node name="DateLabel" type="Label" parent="FormPanel/FormScroll/FormPadding/FormStack"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "DUE DATE (YYYY-MM-DD)"
+
+[node name="DateInput" type="LineEdit" parent="FormPanel/FormScroll/FormPadding/FormStack"]
+layout_mode = 2
+max_length = 10
+placeholder_text = "2026-10-30"
+
+[node name="QuickDates" type="HBoxContainer" parent="FormPanel/FormScroll/FormPadding/FormStack"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="TodayButton" type="Button" parent="FormPanel/FormScroll/FormPadding/FormStack/QuickDates"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "TODAY"
+
+[node name="TomorrowButton" type="Button" parent="FormPanel/FormScroll/FormPadding/FormStack/QuickDates"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "+1 DAY"
+
+[node name="WeekButton" type="Button" parent="FormPanel/FormScroll/FormPadding/FormStack/QuickDates"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "+7 DAYS"
+
+[node name="EndLabel" type="Label" parent="FormPanel/FormScroll/FormPadding/FormStack"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "REPEAT THROUGH (OPTIONAL)"
+
+[node name="EndInput" type="LineEdit" parent="FormPanel/FormScroll/FormPadding/FormStack"]
+layout_mode = 2
+max_length = 10
+placeholder_text = "YYYY-MM-DD or leave blank"
+
+[node name="FormError" type="Label" parent="FormPanel/FormScroll/FormPadding/FormStack"]
+layout_mode = 2
+autowrap_mode = 3
+theme_override_font_sizes/font_size = 12
+text = ""
+
+[node name="FormButtons" type="HBoxContainer" parent="FormPanel/FormScroll/FormPadding/FormStack"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="SaveTaskButton" type="Button" parent="FormPanel/FormScroll/FormPadding/FormStack/FormButtons"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "CREATE TASK"
+
+[node name="CancelButton" type="Button" parent="FormPanel/FormScroll/FormPadding/FormStack/FormButtons"]
+layout_mode = 2
+text = "CANCEL"
+
+[node name="TaskFilters" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="TodayFilter" type="Button" parent="TaskFilters"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "TODAY"
+
+[node name="AllFilter" type="Button" parent="TaskFilters"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "ALL TASKS"
+
+[node name="TaskScroll" type="ScrollContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="TaskRows" type="VBoxContainer" parent="TaskScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 7
+
+[node name="ProgressLabel" type="Label" parent="."]
+layout_mode = 2
+theme_override_font_sizes/font_size = 13
+text = "0 / 0 completed"

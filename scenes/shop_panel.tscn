@@ -1,0 +1,149 @@
+[gd_scene load_steps=12 format=3]
+
+[ext_resource type="Script" path="res://scripts/shop_panel.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://assets/ui/treat.png" id="2_treat"]
+[ext_resource type="PackedScene" path="res://scenes/shop_item.tscn" id="3_item"]
+[ext_resource type="Texture2D" path="res://assets/habitat/bed.png" id="4_bed"]
+[ext_resource type="Texture2D" path="res://assets/habitat/flowers.png" id="5_flowers"]
+[ext_resource type="Texture2D" path="res://assets/habitat/pond.png" id="6_pond"]
+[ext_resource type="Texture2D" path="res://assets/habitat/land.png" id="7_land"]
+
+[ext_resource type="Texture2D" path="res://assets/ui/wood_green.png" id="v8_wood_green"]
+
+[sub_resource type="StyleBoxTexture" id="CareStyle"]
+texture = ExtResource("v8_wood_green")
+texture_margin_left = 6.0
+texture_margin_top = 6.0
+texture_margin_right = 6.0
+texture_margin_bottom = 6.0
+content_margin_left = 9.0
+content_margin_top = 8.0
+content_margin_right = 9.0
+content_margin_bottom = 8.0
+
+[sub_resource type="StyleBoxFlat" id="ScrollStyle"]
+bg_color = Color(0.96, 0.87, 0.68, 1)
+
+[node name="ShopPanel" type="VBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 7
+script = ExtResource("1_script")
+
+[node name="TitleRow" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="SectionTitle" type="Label" parent="TitleRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+text = "THE LITTLE SHOP"
+
+[node name="SectionHint" type="Label" parent="."]
+layout_mode = 2
+autowrap_mode = 3
+theme_override_font_sizes/font_size = 12
+text = "5 plots total to unlock. Keep decorations in your bag until you place them."
+
+[node name="CareSection" type="Label" parent="."]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "CARE & TREATS"
+
+[node name="CarePanel" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+theme_override_styles/panel = SubResource("CareStyle")
+
+[node name="CareMargin" type="MarginContainer" parent="CarePanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 7
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 7
+theme_override_constants/margin_bottom = 6
+
+[node name="CareRow" type="HBoxContainer" parent="CarePanel/CareMargin"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="CareIcon" type="TextureRect" parent="CarePanel/CareMargin/CareRow"]
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 2
+texture = ExtResource("2_treat")
+texture_filter = 1
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CareCopy" type="VBoxContainer" parent="CarePanel/CareMargin/CareRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 2
+
+[node name="CareTitle" type="Label" parent="CarePanel/CareMargin/CareRow/CareCopy"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Feed Mochi"
+
+[node name="CareHint" type="Label" parent="CarePanel/CareMargin/CareRow/CareCopy"]
+layout_mode = 2
+autowrap_mode = 3
+theme_override_font_sizes/font_size = 11
+text = "+10 happiness"
+
+[node name="FeedButton" type="Button" parent="CarePanel/CareMargin/CareRow"]
+custom_minimum_size = Vector2(87, 33)
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "15c FEED"
+
+[node name="UpgradeHeading" type="Label" parent="."]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "WOODLAND UPGRADES"
+
+[node name="CategoryTabs" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="AllButton" type="Button" parent="CategoryTabs"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+text = "ALL"
+
+[node name="CozyButton" type="Button" parent="CategoryTabs"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+text = "COZY"
+
+[node name="NatureButton" type="Button" parent="CategoryTabs"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+text = "OUTDOORS"
+
+[node name="DecorButton" type="Button" parent="CategoryTabs"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+text = "DECOR"
+
+[node name="ShopScroll" type="ScrollContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+clip_contents = true
+
+[node name="ShopItems" type="VBoxContainer" parent="ShopScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 7
+
+[node name="MessageLabel" type="Label" parent="."]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+autowrap_mode = 3
+theme_override_font_sizes/font_size = 12
+text = "BUY to collect · PLACE to decorate · SELL to earn half back."

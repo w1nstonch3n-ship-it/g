@@ -1,0 +1,208 @@
+[gd_scene load_steps=11 format=3]
+
+[ext_resource type="Script" path="res://scripts/main.gd" id="script"]
+[ext_resource type="PackedScene" path="res://scenes/habitat_view.tscn" id="view"]
+[ext_resource type="PackedScene" path="res://scenes/shop_panel.tscn" id="shop"]
+[ext_resource type="PackedScene" path="res://scenes/focus_panel.tscn" id="focus"]
+[ext_resource type="PackedScene" path="res://scenes/planner_board.tscn" id="board"]
+[ext_resource type="Theme" path="res://assets/ui/pixel_theme.tres" id="theme"]
+[ext_resource type="Texture2D" path="res://assets/ui/coin_new.png" id="coin"]
+
+[ext_resource type="Texture2D" path="res://assets/ui/wood_panel.png" id="v8_wood_panel"]
+
+[sub_resource type="StyleBoxFlat" id="TopBar"]
+bg_color = Color(0.32, 0.22, 0.15, 1)
+border_width_bottom = 4
+border_color = Color(0.36, 0.24, 0.15, 1)
+
+[sub_resource type="StyleBoxTexture" id="Sidebar"]
+texture = ExtResource("v8_wood_panel")
+texture_margin_left = 6.0
+texture_margin_top = 6.0
+texture_margin_right = 6.0
+texture_margin_bottom = 6.0
+content_margin_left = 9.0
+content_margin_top = 8.0
+content_margin_right = 9.0
+content_margin_bottom = 8.0
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("theme")
+texture_filter = 1
+script = ExtResource("script")
+
+[node name="PageBackground" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color(0.84, 0.77, 0.63, 1)
+
+[node name="PetPage" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="HabitatView" parent="PetPage" instance=ExtResource("view")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 91.0
+offset_right = -376.0
+offset_bottom = -20.0
+
+[node name="Sidebar" type="PanelContainer" parent="PetPage"]
+layout_mode = 1
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -360.0
+offset_right = -16.0
+offset_top = 91.0
+offset_bottom = -20.0
+theme_override_styles/panel = SubResource("Sidebar")
+
+[node name="Padding" type="MarginContainer" parent="PetPage/Sidebar"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="Stack" type="VBoxContainer" parent="PetPage/Sidebar/Padding"]
+layout_mode = 2
+theme_override_constants/separation = 9
+
+[node name="PetHeader" type="Label" parent="PetPage/Sidebar/Padding/Stack"]
+layout_mode = 2
+text = "MOCHI'S NOOK"
+theme_override_font_sizes/font_size = 20
+
+[node name="PetLine" type="Label" parent="PetPage/Sidebar/Padding/Stack"]
+layout_mode = 2
+text = "Mochi  |  Happiness 70 / 100"
+theme_override_font_sizes/font_size = 13
+
+[node name="Divider" type="HSeparator" parent="PetPage/Sidebar/Padding/Stack"]
+layout_mode = 2
+
+[node name="PetTabs" type="HBoxContainer" parent="PetPage/Sidebar/Padding/Stack"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="ShopTab" type="Button" parent="PetPage/Sidebar/Padding/Stack/PetTabs"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "SHOP + CARE"
+
+[node name="FocusTab" type="Button" parent="PetPage/Sidebar/Padding/Stack/PetTabs"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "FOCUS TIMER"
+
+[node name="ShopPanel" parent="PetPage/Sidebar/Padding/Stack" instance=ExtResource("shop")]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="FocusPanel" parent="PetPage/Sidebar/Padding/Stack" instance=ExtResource("focus")]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Footer" type="Label" parent="PetPage/Sidebar/Padding/Stack"]
+layout_mode = 2
+text = "Little progress grows into a big forest."
+theme_override_font_sizes/font_size = 11
+
+[node name="WorldTitle" type="Label" parent="PetPage"]
+visible = false
+layout_mode = 0
+text = "MOCHI'S FOREST"
+
+[node name="WorldSubtitle" type="Label" parent="PetPage"]
+visible = false
+layout_mode = 0
+text = "Your little companion while you work"
+
+[node name="Toast" type="Label" parent="PetPage"]
+visible = false
+layout_mode = 1
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 38.0
+offset_top = -92.0
+offset_right = 700.0
+offset_bottom = -65.0
+text = "Mochi is happy!"
+theme_override_font_sizes/font_size = 17
+theme_override_colors/font_color = Color(0.218, 0.347, 0.262, 1)
+
+[node name="PlannerPage" parent="." instance=ExtResource("board")]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="TopNav" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 76.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("TopBar")
+
+[node name="NavMargin" type="MarginContainer" parent="TopNav"]
+layout_mode = 2
+theme_override_constants/margin_left = 22
+theme_override_constants/margin_right = 22
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="NavRow" type="HBoxContainer" parent="TopNav/NavMargin"]
+layout_mode = 2
+theme_override_constants/separation = 13
+
+[node name="Logo" type="Label" parent="TopNav/NavMargin/NavRow"]
+custom_minimum_size = Vector2(255, 0)
+layout_mode = 2
+text = "LITTLE PAW  |  MOCHIS FOREST"
+theme_override_colors/font_color = Color(0.975, 0.924, 0.793, 1)
+theme_override_font_sizes/font_size = 22
+
+[node name="PetTab" type="Button" parent="TopNav/NavMargin/NavRow"]
+custom_minimum_size = Vector2(138, 0)
+layout_mode = 2
+text = "PET"
+
+[node name="PlannerTab" type="Button" parent="TopNav/NavMargin/NavRow"]
+custom_minimum_size = Vector2(138, 0)
+layout_mode = 2
+text = "PLANNER"
+
+[node name="NavSpacer" type="Control" parent="TopNav/NavMargin/NavRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CoinIcon" type="TextureRect" parent="TopNav/NavMargin/NavRow"]
+custom_minimum_size = Vector2(29, 29)
+layout_mode = 2
+texture = ExtResource("coin")
+texture_filter = 1
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CoinLabel" type="Label" parent="TopNav/NavMargin/NavRow"]
+layout_mode = 2
+text = "45"
+theme_override_colors/font_color = Color(0.985, 0.928, 0.788, 1)
+theme_override_font_sizes/font_size = 20

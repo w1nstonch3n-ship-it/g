@@ -1,0 +1,356 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://scripts/planner_board.gd" id="1_script"]
+[ext_resource type="PackedScene" path="res://scenes/task_editor.tscn" id="2_editor"]
+
+[ext_resource type="Texture2D" path="res://assets/ui/wood_card.png" id="v8_wood_card"]
+[ext_resource type="Texture2D" path="res://assets/ui/wood_panel.png" id="v8_wood_panel"]
+
+[sub_resource type="StyleBoxTexture" id="Column"]
+texture = ExtResource("v8_wood_panel")
+texture_margin_left = 6.0
+texture_margin_top = 6.0
+texture_margin_right = 6.0
+texture_margin_bottom = 6.0
+content_margin_left = 9.0
+content_margin_top = 8.0
+content_margin_right = 9.0
+content_margin_bottom = 8.0
+
+[sub_resource type="StyleBoxTexture" id="Bg"]
+texture = ExtResource("v8_wood_panel")
+texture_margin_left = 6.0
+texture_margin_top = 6.0
+texture_margin_right = 6.0
+texture_margin_bottom = 6.0
+content_margin_left = 9.0
+content_margin_top = 8.0
+content_margin_right = 9.0
+content_margin_bottom = 8.0
+
+[sub_resource type="StyleBoxTexture" id="Soft"]
+texture = ExtResource("v8_wood_card")
+texture_margin_left = 6.0
+texture_margin_top = 6.0
+texture_margin_right = 6.0
+texture_margin_bottom = 6.0
+content_margin_left = 9.0
+content_margin_top = 8.0
+content_margin_right = 9.0
+content_margin_bottom = 8.0
+
+[node name="PlannerBoard" type="Control"]
+layout_mode = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_script")
+
+[node name="Background" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("Bg")
+
+[node name="BoardMargin" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 88.0
+offset_bottom = -16.0
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_right = 20
+
+[node name="Stack" type="VBoxContainer" parent="BoardMargin"]
+layout_mode = 2
+theme_override_constants/separation = 9
+
+[node name="Heading" type="HBoxContainer" parent="BoardMargin/Stack"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="BoardMargin/Stack/Heading"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "YOUR LITTLE PLANNER"
+theme_override_font_sizes/font_size = 23
+
+[node name="NewTaskButton" type="Button" parent="BoardMargin/Stack/Heading"]
+layout_mode = 2
+custom_minimum_size = Vector2(158, 39)
+text = "+ NEW TASK"
+
+[node name="BoardBar" type="HBoxContainer" parent="BoardMargin/Stack"]
+layout_mode = 2
+theme_override_constants/separation = 7
+
+[node name="BoardScroll" type="ScrollContainer" parent="BoardMargin/Stack/BoardBar"]
+layout_mode = 2
+size_flags_horizontal = 3
+horizontal_scroll_mode = 1
+vertical_scroll_mode = 0
+
+[node name="BoardButtons" type="HBoxContainer" parent="BoardMargin/Stack/BoardBar/BoardScroll"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="NewBoardButton" type="Button" parent="BoardMargin/Stack/BoardBar"]
+layout_mode = 2
+custom_minimum_size = Vector2(115, 35)
+text = "+ BOARD"
+theme_override_font_sizes/font_size = 13
+
+[node name="DeleteBoardButton" type="Button" parent="BoardMargin/Stack/BoardBar"]
+layout_mode = 2
+custom_minimum_size = Vector2(103, 35)
+text = "REMOVE"
+tooltip_text = "Remove this custom board; tasks move to Personal"
+theme_override_font_sizes/font_size = 13
+
+[node name="InfoLine" type="HBoxContainer" parent="BoardMargin/Stack"]
+layout_mode = 2
+
+[node name="StatusLabel" type="Label" parent="BoardMargin/Stack/InfoLine"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Daily habits reset at local midnight - even after closing the game."
+theme_override_font_sizes/font_size = 12
+
+[node name="CountLabel" type="Label" parent="BoardMargin/Stack/InfoLine"]
+layout_mode = 2
+text = "0 of 0 complete"
+theme_override_font_sizes/font_size = 13
+
+[node name="ColumnRow" type="HBoxContainer" parent="BoardMargin/Stack"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 9
+
+[node name="TodayColumn" type="PanelContainer" parent="BoardMargin/Stack/ColumnRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("Column")
+
+[node name="Layout" type="VBoxContainer" parent="BoardMargin/Stack/ColumnRow/TodayColumn"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="Title" type="Label" parent="BoardMargin/Stack/ColumnRow/TodayColumn/Layout"]
+layout_mode = 2
+text = "TODAY"
+theme_override_font_sizes/font_size = 16
+
+[node name="Hint" type="Label" parent="BoardMargin/Stack/ColumnRow/TodayColumn/Layout"]
+layout_mode = 2
+text = "Due now / no deadline"
+clip_text = true
+theme_override_font_sizes/font_size = 11
+
+[node name="TaskScroll" type="ScrollContainer" parent="BoardMargin/Stack/ColumnRow/TodayColumn/Layout"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="TaskCards" type="VBoxContainer" parent="BoardMargin/Stack/ColumnRow/TodayColumn/Layout/TaskScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+
+[node name="EmptyLabel" type="Label" parent="BoardMargin/Stack/ColumnRow/TodayColumn/Layout"]
+layout_mode = 2
+text = "Nothing here yet."
+theme_override_font_sizes/font_size = 12
+
+[node name="UpcomingColumn" type="PanelContainer" parent="BoardMargin/Stack/ColumnRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("Column")
+
+[node name="Layout" type="VBoxContainer" parent="BoardMargin/Stack/ColumnRow/UpcomingColumn"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="Title" type="Label" parent="BoardMargin/Stack/ColumnRow/UpcomingColumn/Layout"]
+layout_mode = 2
+text = "UPCOMING"
+theme_override_font_sizes/font_size = 16
+
+[node name="Hint" type="Label" parent="BoardMargin/Stack/ColumnRow/UpcomingColumn/Layout"]
+layout_mode = 2
+text = "Future deadlines"
+clip_text = true
+theme_override_font_sizes/font_size = 11
+
+[node name="TaskScroll" type="ScrollContainer" parent="BoardMargin/Stack/ColumnRow/UpcomingColumn/Layout"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="TaskCards" type="VBoxContainer" parent="BoardMargin/Stack/ColumnRow/UpcomingColumn/Layout/TaskScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+
+[node name="EmptyLabel" type="Label" parent="BoardMargin/Stack/ColumnRow/UpcomingColumn/Layout"]
+layout_mode = 2
+text = "Nothing here yet."
+theme_override_font_sizes/font_size = 12
+
+[node name="HabitsColumn" type="PanelContainer" parent="BoardMargin/Stack/ColumnRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("Column")
+
+[node name="Layout" type="VBoxContainer" parent="BoardMargin/Stack/ColumnRow/HabitsColumn"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="Title" type="Label" parent="BoardMargin/Stack/ColumnRow/HabitsColumn/Layout"]
+layout_mode = 2
+text = "DAILY HABITS"
+theme_override_font_sizes/font_size = 16
+
+[node name="Hint" type="Label" parent="BoardMargin/Stack/ColumnRow/HabitsColumn/Layout"]
+layout_mode = 2
+text = "Available again tomorrow"
+clip_text = true
+theme_override_font_sizes/font_size = 11
+
+[node name="TaskScroll" type="ScrollContainer" parent="BoardMargin/Stack/ColumnRow/HabitsColumn/Layout"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="TaskCards" type="VBoxContainer" parent="BoardMargin/Stack/ColumnRow/HabitsColumn/Layout/TaskScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+
+[node name="EmptyLabel" type="Label" parent="BoardMargin/Stack/ColumnRow/HabitsColumn/Layout"]
+layout_mode = 2
+text = "Nothing here yet."
+theme_override_font_sizes/font_size = 12
+
+[node name="DoneColumn" type="PanelContainer" parent="BoardMargin/Stack/ColumnRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("Column")
+
+[node name="Layout" type="VBoxContainer" parent="BoardMargin/Stack/ColumnRow/DoneColumn"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="Title" type="Label" parent="BoardMargin/Stack/ColumnRow/DoneColumn/Layout"]
+layout_mode = 2
+text = "COMPLETED"
+theme_override_font_sizes/font_size = 16
+
+[node name="Hint" type="Label" parent="BoardMargin/Stack/ColumnRow/DoneColumn/Layout"]
+layout_mode = 2
+text = "One-time accomplishments"
+clip_text = true
+theme_override_font_sizes/font_size = 11
+
+[node name="TaskScroll" type="ScrollContainer" parent="BoardMargin/Stack/ColumnRow/DoneColumn/Layout"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="TaskCards" type="VBoxContainer" parent="BoardMargin/Stack/ColumnRow/DoneColumn/Layout/TaskScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8
+
+[node name="EmptyLabel" type="Label" parent="BoardMargin/Stack/ColumnRow/DoneColumn/Layout"]
+layout_mode = 2
+text = "Nothing here yet."
+theme_override_font_sizes/font_size = 12
+
+[node name="TaskEditor" parent="." instance=ExtResource("2_editor")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="DeleteBoardDialog" type="ConfirmationDialog" parent="."]
+title = "Remove board?"
+size = Vector2i(440, 180)
+dialog_text = "Tasks in this board will move to Personal."
+ok_button_text = "REMOVE BOARD"
+
+[node name="DeleteTaskDialog" type="ConfirmationDialog" parent="."]
+title = "Delete this task?"
+size = Vector2i(480, 180)
+ok_button_text = "DELETE TASK"
+
+[node name="NewBoardOverlay" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Shade" type="ColorRect" parent="NewBoardOverlay"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.16, 0.14, 0.12, 0.5)
+
+[node name="BoardPanel" type="PanelContainer" parent="NewBoardOverlay"]
+layout_mode = 1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -240.0
+offset_top = -119.0
+offset_right = 240.0
+offset_bottom = 119.0
+
+[node name="Padding" type="MarginContainer" parent="NewBoardOverlay/BoardPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_right = 18
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="Stack" type="VBoxContainer" parent="NewBoardOverlay/BoardPanel/Padding"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Title" type="Label" parent="NewBoardOverlay/BoardPanel/Padding/Stack"]
+layout_mode = 2
+text = "CREATE A BOARD"
+theme_override_font_sizes/font_size = 21
+
+[node name="BoardNameInput" type="LineEdit" parent="NewBoardOverlay/BoardPanel/Padding/Stack"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 43)
+placeholder_text = "e.g. Homework, Soccer, Exams"
+max_length = 24
+
+[node name="BoardError" type="Label" parent="NewBoardOverlay/BoardPanel/Padding/Stack"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.71, 0.2, 0.18, 1)
+theme_override_font_sizes/font_size = 12
+
+[node name="Push" type="Control" parent="NewBoardOverlay/BoardPanel/Padding/Stack"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Buttons" type="HBoxContainer" parent="NewBoardOverlay/BoardPanel/Padding/Stack"]
+layout_mode = 2
+
+[node name="SaveButton" type="Button" parent="NewBoardOverlay/BoardPanel/Padding/Stack/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "CREATE BOARD"
+
+[node name="CancelButton" type="Button" parent="NewBoardOverlay/BoardPanel/Padding/Stack/Buttons"]
+layout_mode = 2
+text = "CANCEL"

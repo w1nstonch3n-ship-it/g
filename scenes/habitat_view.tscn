@@ -1,0 +1,120 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scripts/habitat_view.gd" id="script"]
+[ext_resource type="PackedScene" path="res://scenes/habitat.tscn" id="world"]
+
+[ext_resource type="Texture2D" path="res://assets/ui/wood_panel.png" id="v8_wood_panel"]
+
+[sub_resource type="StyleBoxTexture" id="ViewBackground"]
+texture = ExtResource("v8_wood_panel")
+texture_margin_left = 6.0
+texture_margin_top = 6.0
+texture_margin_right = 6.0
+texture_margin_bottom = 6.0
+content_margin_left = 9.0
+content_margin_top = 8.0
+content_margin_right = 9.0
+content_margin_bottom = 8.0
+
+[node name="HabitatView" type="PanelContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource("script")
+theme_override_styles/panel = SubResource("ViewBackground")
+
+[node name="ViewportFrame" type="SubViewportContainer" parent="."]
+layout_mode = 2
+stretch = true
+mouse_filter = 1
+
+[node name="WorldViewport" type="SubViewport" parent="ViewportFrame"]
+size = Vector2i(760, 540)
+render_target_update_mode = 4
+handle_input_locally = false
+
+[node name="Habitat" parent="ViewportFrame/WorldViewport" instance=ExtResource("world")]
+
+[node name="Camera" type="Camera2D" parent="ViewportFrame/WorldViewport"]
+position = Vector2(420, 310)
+position_smoothing_enabled = true
+position_smoothing_speed = 4.0
+
+[node name="Overlay" type="Control" parent="."]
+layout_mode = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="NameTag" type="Label" parent="Overlay"]
+layout_mode = 1
+offset_left = 23.0
+offset_top = 19.0
+offset_right = 380.0
+offset_bottom = 61.0
+text = "MOCHI'S FOREST"
+theme_override_font_sizes/font_size = 25
+theme_override_colors/font_color = Color(0.214, 0.368, 0.304, 1)
+
+[node name="Tagline" type="Label" parent="Overlay"]
+layout_mode = 1
+offset_left = 24.0
+offset_top = 56.0
+offset_right = 465.0
+offset_bottom = 83.0
+text = "A little world, one task at a time."
+theme_override_font_sizes/font_size = 13
+theme_override_colors/font_color = Color(0.265, 0.410, 0.334, 1)
+
+[node name="Controls" type="HBoxContainer" parent="Overlay"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 14.0
+offset_top = -58.0
+offset_right = -14.0
+offset_bottom = -10.0
+theme_override_constants/separation = 10
+mouse_filter = 1
+
+[node name="ScrollLeft" type="Button" parent="Overlay/Controls"]
+layout_mode = 2
+custom_minimum_size = Vector2(49, 36)
+text = "<"
+
+[node name="AreaLabel" type="Label" parent="Overlay/Controls"]
+layout_mode = 2
+size_flags_horizontal = 3
+horizontal_alignment = 1
+vertical_alignment = 1
+text = "THE CLEARING  /  GROW YOUR FOREST"
+theme_override_font_sizes/font_size = 13
+
+[node name="ZoomOut" type="Button" parent="Overlay/Controls"]
+layout_mode = 2
+custom_minimum_size = Vector2(42, 36)
+text = "-"
+tooltip_text = "Zoom out (Ctrl + mouse wheel)"
+
+[node name="ZoomLabel" type="Label" parent="Overlay/Controls"]
+layout_mode = 2
+custom_minimum_size = Vector2(52, 0)
+vertical_alignment = 1
+horizontal_alignment = 1
+text = "100%"
+theme_override_font_sizes/font_size = 12
+
+[node name="ZoomIn" type="Button" parent="Overlay/Controls"]
+layout_mode = 2
+custom_minimum_size = Vector2(42, 36)
+text = "+"
+tooltip_text = "Zoom in (Ctrl + mouse wheel)"
+
+[node name="ScrollRight" type="Button" parent="Overlay/Controls"]
+layout_mode = 2
+custom_minimum_size = Vector2(49, 36)
+text = ">"

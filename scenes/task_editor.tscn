@@ -1,0 +1,218 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/task_editor.gd" id="1_script"]
+
+[ext_resource type="Texture2D" path="res://assets/ui/wood_panel.png" id="v8_wood_panel"]
+
+[sub_resource type="StyleBoxTexture" id="PopupStyle"]
+texture = ExtResource("v8_wood_panel")
+texture_margin_left = 6.0
+texture_margin_top = 6.0
+texture_margin_right = 6.0
+texture_margin_bottom = 6.0
+content_margin_left = 9.0
+content_margin_top = 8.0
+content_margin_right = 9.0
+content_margin_bottom = 8.0
+
+[node name="TaskEditor" type="Control"]
+visible = false
+layout_mode = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 1
+script = ExtResource("1_script")
+
+[node name="Dimmer" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.16, 0.14, 0.12, 0.48)
+
+[node name="EditorPanel" type="PanelContainer" parent="."]
+layout_mode = 1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -370.0
+offset_top = -226.0
+offset_right = 370.0
+offset_bottom = 226.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("PopupStyle")
+
+[node name="Padding" type="MarginContainer" parent="EditorPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Stack" type="VBoxContainer" parent="EditorPanel/Padding"]
+layout_mode = 2
+theme_override_constants/separation = 7
+
+[node name="Heading" type="HBoxContainer" parent="EditorPanel/Padding/Stack"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="EditorPanel/Padding/Stack/Heading"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "CREATE A TASK"
+theme_override_font_sizes/font_size = 22
+
+[node name="CloseButton" type="Button" parent="EditorPanel/Padding/Stack/Heading"]
+layout_mode = 2
+custom_minimum_size = Vector2(38, 32)
+text = "X"
+
+[node name="NameInput" type="LineEdit" parent="EditorPanel/Padding/Stack"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 38)
+placeholder_text = "What do you want to accomplish?"
+max_length = 100
+
+[node name="FirstRow" type="HBoxContainer" parent="EditorPanel/Padding/Stack"]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="SecondRow" type="HBoxContainer" parent="EditorPanel/Padding/Stack"]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="ExtraRow" type="HBoxContainer" parent="EditorPanel/Padding/Stack"]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="KindField" type="VBoxContainer" parent="EditorPanel/Padding/Stack/FirstRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 3
+
+[node name="FieldLabel" type="Label" parent="EditorPanel/Padding/Stack/FirstRow/KindField"]
+layout_mode = 2
+text = "TYPE"
+theme_override_font_sizes/font_size = 12
+
+[node name="KindSelect" type="OptionButton" parent="EditorPanel/Padding/Stack/FirstRow/KindField"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 37)
+
+[node name="SizeField" type="VBoxContainer" parent="EditorPanel/Padding/Stack/FirstRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 3
+
+[node name="FieldLabel" type="Label" parent="EditorPanel/Padding/Stack/FirstRow/SizeField"]
+layout_mode = 2
+text = "DIFFICULTY / REWARD"
+theme_override_font_sizes/font_size = 12
+
+[node name="SizeSelect" type="OptionButton" parent="EditorPanel/Padding/Stack/FirstRow/SizeField"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 37)
+
+[node name="BoardField" type="VBoxContainer" parent="EditorPanel/Padding/Stack/SecondRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 3
+
+[node name="FieldLabel" type="Label" parent="EditorPanel/Padding/Stack/SecondRow/BoardField"]
+layout_mode = 2
+text = "BOARD"
+theme_override_font_sizes/font_size = 12
+
+[node name="BoardSelect" type="OptionButton" parent="EditorPanel/Padding/Stack/SecondRow/BoardField"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 37)
+
+[node name="DateField" type="VBoxContainer" parent="EditorPanel/Padding/Stack/SecondRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 3
+
+[node name="DateLabel" type="Label" parent="EditorPanel/Padding/Stack/SecondRow/DateField"]
+layout_mode = 2
+text = "DUE DATE"
+theme_override_font_sizes/font_size = 12
+
+[node name="DateInput" type="LineEdit" parent="EditorPanel/Padding/Stack/SecondRow/DateField"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 37)
+placeholder_text = "YYYY-MM-DD (optional)"
+
+[node name="EndField" type="VBoxContainer" parent="EditorPanel/Padding/Stack/ExtraRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 3
+
+[node name="FieldLabel" type="Label" parent="EditorPanel/Padding/Stack/ExtraRow/EndField"]
+layout_mode = 2
+text = "DAILY END DATE (OPTIONAL)"
+theme_override_font_sizes/font_size = 12
+
+[node name="EndInput" type="LineEdit" parent="EditorPanel/Padding/Stack/ExtraRow/EndField"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 37)
+placeholder_text = "YYYY-MM-DD (optional)"
+
+[node name="QuickRow" type="HBoxContainer" parent="EditorPanel/Padding/Stack"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="TodayButton" type="Button" parent="EditorPanel/Padding/Stack/QuickRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0, 32)
+text = "TODAY"
+theme_override_font_sizes/font_size = 13
+
+[node name="TomorrowButton" type="Button" parent="EditorPanel/Padding/Stack/QuickRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0, 32)
+text = "TOMORROW"
+theme_override_font_sizes/font_size = 13
+
+[node name="WeekButton" type="Button" parent="EditorPanel/Padding/Stack/QuickRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0, 32)
+text = "IN 7 DAYS"
+theme_override_font_sizes/font_size = 13
+
+[node name="HelpLabel" type="Label" parent="EditorPanel/Padding/Stack"]
+layout_mode = 2
+text = "One-time task due today."
+theme_override_font_sizes/font_size = 13
+
+[node name="ErrorLabel" type="Label" parent="EditorPanel/Padding/Stack"]
+layout_mode = 2
+text = ""
+theme_override_colors/font_color = Color(0.71, 0.2, 0.18, 1)
+theme_override_font_sizes/font_size = 12
+
+[node name="Push" type="Control" parent="EditorPanel/Padding/Stack"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Buttons" type="HBoxContainer" parent="EditorPanel/Padding/Stack"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="SaveButton" type="Button" parent="EditorPanel/Padding/Stack/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 3
+custom_minimum_size = Vector2(0, 42)
+text = "ADD TASK +"
+
+[node name="CancelButton" type="Button" parent="EditorPanel/Padding/Stack/Buttons"]
+layout_mode = 2
+custom_minimum_size = Vector2(130, 42)
+text = "CANCEL"
+

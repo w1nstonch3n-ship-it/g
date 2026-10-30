@@ -1,0 +1,39 @@
+[gd_scene load_steps=12 format=3]
+
+[ext_resource type="Script" path="res://scripts/pet.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://assets/ui/heart.png" id="2_heart"]
+[ext_resource type="Texture2D" path="res://assets/pets/bear_idle0.png" id="tex_bear_idle0"]
+[ext_resource type="Texture2D" path="res://assets/pets/bear_idle1.png" id="tex_bear_idle1"]
+[ext_resource type="Texture2D" path="res://assets/pets/bear_walk0.png" id="tex_bear_walk0"]
+[ext_resource type="Texture2D" path="res://assets/pets/bear_walk1.png" id="tex_bear_walk1"]
+[ext_resource type="Texture2D" path="res://assets/pets/bear_walk2.png" id="tex_bear_walk2"]
+[ext_resource type="Texture2D" path="res://assets/pets/bear_eat0.png" id="tex_bear_eat0"]
+[ext_resource type="Texture2D" path="res://assets/pets/bear_sleep0.png" id="tex_bear_sleep0"]
+[ext_resource type="Texture2D" path="res://assets/pets/bear_shadow.png" id="tex_bear_shadow"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bear"]
+animations = [{"frames": [{"duration": 1.0, "texture": ExtResource("tex_bear_idle0")}, {"duration": 1.0, "texture": ExtResource("tex_bear_idle1")}], "loop": true, "name": &"idle", "speed": 1.7}, {"frames": [{"duration": 1.0, "texture": ExtResource("tex_bear_walk0")}, {"duration": 1.0, "texture": ExtResource("tex_bear_walk1")}, {"duration": 1.0, "texture": ExtResource("tex_bear_walk2")}, {"duration": 1.0, "texture": ExtResource("tex_bear_walk1")}], "loop": true, "name": &"walk", "speed": 6.0}, {"frames": [{"duration": 1.0, "texture": ExtResource("tex_bear_eat0")}], "loop": true, "name": &"eat", "speed": 1.7}, {"frames": [{"duration": 1.0, "texture": ExtResource("tex_bear_sleep0")}], "loop": true, "name": &"sleep", "speed": 1.7}]
+
+[node name="Pet" type="Node2D"]
+script = ExtResource("1_script")
+
+[node name="Shadow" type="Sprite2D" parent="."]
+position = Vector2(0, -5)
+scale = Vector2(2.0, 1.2)
+texture_filter = 1
+texture = ExtResource("tex_bear_shadow")
+
+[node name="BearSprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -45)
+scale = Vector2(2, 2)
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_bear")
+autoplay = "idle"
+animation = &"idle"
+
+[node name="HappyHeart" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(30, -96)
+scale = Vector2(1.5, 1.5)
+texture_filter = 1
+texture = ExtResource("2_heart")
